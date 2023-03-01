@@ -1,6 +1,6 @@
 public class Day {
-    int dia;
-    double valor;
+    private int dia;
+    private double valor;
 
     public int getDia() {
         return dia;

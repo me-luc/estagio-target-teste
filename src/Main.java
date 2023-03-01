@@ -82,6 +82,7 @@ public class Main {
         int qtBelowAverageDays = 0;
         int qtAboveAverageDays = 0;
         double totalProfit = 0.0;
+        int totalDays = 0;
 
         for(int i = 0; i < month.size(); i++){
             Day currentDay = month.get(i);
@@ -90,17 +91,18 @@ public class Main {
                 smallestProfitDay = currentDay;
             }
 
-            if (currentDay.getValor() > largestProfitDay.getValor()) largestProfitDay = currentDay;
-            if (currentDay.getValor() < smallestProfitDay.getValor()) smallestProfitDay = currentDay;
-
-            totalProfit += currentDay.valor;
+            if (currentDay.getValor() > largestProfitDay.getValor() ) largestProfitDay = currentDay;
+            if (currentDay.getValor() < smallestProfitDay.getValor() && currentDay.getValor() > 0) smallestProfitDay = currentDay;
+            if(currentDay.getValor() > 0) totalDays++;
+            totalProfit += currentDay.getValor();
         }
 
-        double averageProfitPerDay = getDailyProfitAverage(totalProfit, month.size());
+        double averageProfitPerDay = getDailyProfitAverage(totalProfit, totalDays);
 
         for (Day day : month) {
-            if (day.valor > averageProfitPerDay) qtAboveAverageDays++;
-            if (day.valor < averageProfitPerDay) qtBelowAverageDays++;
+            if (day.getValor() > averageProfitPerDay) qtAboveAverageDays++;
+            if (day.getValor() < averageProfitPerDay) qtBelowAverageDays++;
+
         }
 
 
