@@ -1,9 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 import java.io.IOException;
 import com.google.gson.Gson;
 
@@ -12,21 +9,22 @@ public class Main {
         Scanner scan = new Scanner(System.in);
 
         // 2 - FIBONACCI
-        // System.out.println("Insert a number to check if it is in Fibonacci sequence:
-                // ");
-                // int number = scan.nextInt();
+        System.out.println("2) Insert a number to check if it is in the Fibonacci sequence");
+        int number = scan.nextInt();
+        fibonacci(number);
 
         // 3 - MONTH PROFIT DATA
+        System.out.println("\n\n\n3) QUESTION ");
         ArrayList<Day> month = new ArrayList<>();
         month = getJsonData();
         getMonthSummary(month);
 
-        // 4 - STATE PERCENTUAL MONTH PROFIT
+        // 4 - STATE PERCENTAGE MONTH PROFIT
         int op = 0;
         ArrayList<State> states = new ArrayList<>();
 
         while(op == 0) {
-            System.out.println("Want to insert data manually? YES - 1 | NO - 0");
+            System.out.println("4) For the states question, would you like to insert data manually? YES - 1 | NO - 0");
             int op2 = scan.nextInt();
             System.out.println(op2);
             if(op2 == 0) break;
@@ -49,9 +47,33 @@ public class Main {
         getPercents(states);
 
         // 5 - REVERSE STRING
-        System.out.println("Insert a string to reverse it: ");
+        System.out.println("5) Insert a string to reverse it: ");
         String str = scan.next();
         System.out.println(reverseString(str));
+    }
+
+    public static void fibonacci(int number) {
+        List<Integer> arr = new ArrayList<>();
+
+        int i = 0;
+        do {
+            if(i < 2) {
+                arr.add(i);
+            } else {
+                int last = arr.get(i - 1);
+                int secondLast = arr.get(i - 2);
+                arr.add(last + secondLast);
+            }
+            i++;
+        } while (arr.get( arr.size() - 1) <= number);
+
+
+        if(arr.contains(number)) {
+            System.out.println(number + " is a Fibonacci number");
+        } else {
+            System.out.println(number + " is not a Fibonacci number");
+        }
+        System.out.println("\nFibonacci array >> \n" + arr.toString());
     }
 
     public static void getMonthSummary(ArrayList<Day> month) {
@@ -83,7 +105,7 @@ public class Main {
 
 
         System.out.println(
-            "--- MONTH SUMMARY ---\n" +
+            "\n\n--- MONTH SUMMARY ---\n" +
             "\nSMALLEST PROFIT DAY - R$ " + smallestProfitDay.getValor() + " ON DAY " + smallestProfitDay.getDia() +
             "\nLARGEST PROFIT DAY - R$ " + largestProfitDay.getValor() + " ON DAY " + largestProfitDay.getDia()  +
             "\nN° DAYS ABOVE AVERAGE - " + qtAboveAverageDays  +
